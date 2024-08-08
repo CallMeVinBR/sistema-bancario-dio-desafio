@@ -42,6 +42,10 @@ public abstract class Conta implements IConta {
     public void transferir(double valor, Conta contaDestino){
         if(valor <= 0 || valor > saldo)
             throw new IllegalArgumentException("Valor invalido para transferencia!");
+
+        else if(contaDestino.equals(this)) // Verifica se a origem = destino
+            throw new IllegalArgumentException("A conta destino nao pode ser a mesma que a origem!");
+
         else {
             this.sacar(valor);
             contaDestino.depositar(valor);
